@@ -384,6 +384,7 @@ export function initDataPage() {
 
     loadProductData();
 }
+<<<<<<< HEAD
 
 // function findLastYearPrice(item, allPriceData) {
 //     const [day, month, year] = item.date.split('/');
@@ -403,3 +404,5 @@ export function initDataPage() {
 
 //     return candidate ? candidate.low : 0;
 // }
+=======
+>>>>>>> 3b5787ea0ad8bc2c66b075a024daa9574a182e77
