@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time to Farm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+        <a href="index.html">
+            <h1 class="text-lg font-bold text-green-600">Time to Farm</h1>
+        </a>
+        <nav class="flex space-x-4">
+            <select id="priceFilter" class="hover:text-green-600 bg-white">
+                <option value="all">ทั้งหมด</option>
+                <option value="fruit">ราคาผลไม้</option>
+                <option value="vegetable">ราคาผัก</option>
+            </select>
+            <a href="cal.html" class="text-gray-700 hover:text-green-600">คำนวณพื้นที่</a>
+        </nav>
+    </header>
+
+    <section class="text-center p-4 sm:p-8 bg-green-50">
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+            "เว็บไซต์ช่วยวางแผนปลูกผักผลไม้ <br>
+            พร้อมข้อมูลราคาตลาดที่อัปเดตทุกวัน"
+        </h2>
+        <div class="mt-4 relative inline-block w-full sm:w-auto">
+            <div class="flex items-center gap-2">
+                <input type="text" id="searchInput" autocomplete="off" placeholder="ค้นหาพืชที่คุณต้องการ"
+                    class="p-2 border border-gray-300 rounded-md w-full sm:w-80 focus:outline-none focus:ring-2 focus:ring-green-400">
+                <button id="searchButton" class="p-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+                    ค้นหา
+                </button>
+            </div>
+            <div id="searchDropdown"
+                class="absolute left-0 z-10 w-full sm:w-80 bg-white border border-gray-300 rounded-md mt-1 shadow-lg hidden max-h-60 overflow-y-auto">
+            </div>
+        </div>
+    </section>
+
+    <main class="p-4 sm:p-8">
+        <section id="fruits-section" class="mb-8">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">ราคาผลไม้</h3>
+            <div id="fruits-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            </div>
+        </section>
+
+        <section id="vegetables-section">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">ราคาผัก</h3>
+            <div id="vegetables-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            </div>
+        </section>
+
+        <template id="product-card">
+            <a href="#"
+                class="bg-white shadow rounded-lg p-3 sm:p-4 text-center block hover:shadow-lg transition-shadow">
+                <img src="" alt="" class="h-24 sm:h-32 w-full object-cover mb-2 sm:mb-4 rounded">
+                <h4 class="text-base sm:text-lg font-semibold"></h4>
+                <p class="text-green-600 font-bold text-sm sm:text-base"></p>
+                <p class="text-gray-500 text-xs sm:text-sm"></p>
+            </a>
+        </template>
+    </main>
+    <script type="module">
+        import { initIndex } from '../src/js/index.js';
+        document.addEventListener('DOMContentLoaded', initIndex);
+    </script>
+</body>
+
+</html>
