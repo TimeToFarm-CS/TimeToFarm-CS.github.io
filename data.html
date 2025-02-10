@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/th.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-functions-compat.js"></script>
+
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+        <a href="index.html">
+            <h1 class="text-lg font-bold text-green-600">Time to Farm</h1>
+        </a>
+        <nav class="flex space-x-4">
+            <a href="cal.html?type=${type}&name=${name}" class="text-gray-700 hover:text-green-600">คำนวณพื้นที่</a>
+        </nav>
+    </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const type = params.get('type');
+            const name = params.get('name');
+
+            // แก้ไขลิงก์ให้ใช้ค่าจริง
+            const calLink = document.querySelector('nav a');
+            calLink.href = `cal.html?type=${type}&name=${name}`;
+        });
+    </script>
+    <main class="p-8">
+        <section class="text-center mb-8">
+            <h2 id="productName" class="text-2xl font-bold text-gray-800 mb-4"></h2>
+            <img id="productImage" src="" alt="" class="mx-auto h-64 w-auto object-cover rounded-lg">
+
+        </section>
+        <section
+            class="text-center mb-8 flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+            <select id="productSize" class="border border-gray-300 rounded px-4 py-2">
+            </select>
+            <input type="text" id="dateRange" class="border border-gray-300 rounded px-4 py-2">
+            <div class="inline-flex border border-gray-300 rounded-lg overflow-hidden">
+                <button id="10days" class="px-4 py-2 bg-green-500 text-white">10 วัน</button>
+                <button id="1month" class="px-4 py-2 bg-white text-gray-700">1 เดือน</button>
+                <button id="1year" class="px-4 py-2 bg-white text-gray-700">1 ปี</button>
+            </div>
+            <select id="averageType" class="border border-gray-300 rounded px-4 py-2 mt-4" style="display: none;">
+                <option value="none">ไม่เฉลี่ย</option>
+                <option value="week">เฉลี่ยรายสัปดาห์</option>
+                <option value="month">เฉลี่ยรายเดือน</option>
+            </select>
+            <!-- เพิ่มปุ่มทำนายราคา -->
+            <button id="predictBtn" class="px-4 py-2 bg-blue-500 text-white rounded">
+                คาดการณ์ราคา(2 เดือน)
+            </button>
+        </section>
+        <section class="mb-8">
+            <div class="bg-white shadow rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">กราฟแสดงราคา</h3>
+                <!-- เพิ่ม class 'relative' และ 'h-[400px]' (หรือความสูงอื่นที่ต้องการ) -->
+                <div class="relative h-[400px]">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white shadow rounded-lg p-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">รายละเอียด</h3>
+            <ul id="detailsList" class="list-disc list-inside text-gray-700 space-y-2">
+            </ul>
+
+            <h3 class="text-lg font-bold text-gray-800 mt-6 mb-4">เหมาะปลูกในพื้นที่ที่:</h3>
+            <ul id="conditionsList" class="list-disc list-inside text-gray-700 space-y-2">
+            </ul>
+
+            <h3 class="text-lg font-bold text-gray-800 mt-6 mb-4">พื้นที่แนะนำในไทย:</h3>
+            <p id="recommendedAreas" class="text-gray-700"></p>
+        </section>
+    </main>
+    <script type="module">
+        import { initDataPage } from '../src/js/data.js';
+        initDataPage();
+    </script>
+</body>
+
+</html>

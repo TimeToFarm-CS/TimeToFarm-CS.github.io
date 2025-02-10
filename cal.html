@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คำนวณพื้นที่การปลูก - Time to Farm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <header class="bg-white shadow p-4 flex justify-between items-center">
+    <a href="index.html">
+      <h1 class="text-lg font-bold text-green-600">Time to Farm</h1>
+    </a>
+    <nav class="flex space-x-4">
+      <a href="cal.html" class="text-gray-700 hover:text-green-600">คำนวณพื้นที่</a>
+    </nav>
+  </header>
+
+  <div class="max-w-lg mx-auto p-6 bg-white shadow-md rounded mt-10">
+    <h1 class="text-2xl font-bold mb-4 text-center">คำนวณพื้นที่การปลูกพืช</h1>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium  text-gray-700">ค้นหาและเลือกชนิดพืช</label>
+      <div class="relative">
+        <input type="text" id="searchInput" autocomplete="off"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="พิมพ์เพื่อค้นหาชนิดพืช">
+        <div id="searchDropdown"
+          class="absolute left-0 z-10 w-full bg-white border border-gray-300 rounded-md mt-1 shadow-lg hidden max-h-60 overflow-y-auto">
+        </div>
+      </div>
+    </div>
+
+    <div id="plantInfo" class="mb-4 p-4 bg-gray-50 rounded-md hidden">
+      <img id="plantImage" class="w-full h-48 object-cover rounded-md mb-4">
+      <div id="plantDetails" class="space-y-2 text-sm"></div>
+    </div>
+
+    <div class="mb-4">
+      <label for="totalArea" class="block text-sm font-medium text-gray-700">พื้นที่ทั้งหมด</label>
+      <div class="flex space-x-2">
+        <input type="number" id="totalArea" class="flex-1 mt-1 p-2 border border-gray-300 rounded-md" min="0.25"
+          step="0.25" placeholder="จำนวน">
+        <select id="areaUnit" class="mt-1 p-2 border border-gray-300 rounded-md w-32">
+          <option value="rai">ไร่</option>
+          <option value="sqwa">ตารางวา</option>
+          <option value="sqm">ตารางเมตร</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="flex space-x-4">
+      <button id="calculateBtn" class="flex-1 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+        คำนวณ
+      </button>
+      <button id="resetBtn" class="flex-1 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">
+        ล้างข้อมูล
+      </button>
+    </div>
+
+    <div id="result" class="mt-4 space-y-4">
+      <div id="plantingResult" class="text-center text-lg font-semibold text-green-600"></div>
+      <div id="costEstimate" class="p-4 bg-gray-50 rounded-md hidden">
+        <h3 class="font-bold mb-2">ประมาณการต้นทุน</h3>
+        <div id="costDetails" class="space-y-1 text-sm"></div>
+      </div>
+    </div>
+  </div>
+  <!-- แก้ไขการเรียกใช้ไฟล์ JavaScript -->
+  <script type="module" src="../src/js/cal.js"></script>
+</body>
+
+</html>
