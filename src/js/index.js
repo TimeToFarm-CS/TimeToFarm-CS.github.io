@@ -16,7 +16,7 @@ export async function initHomepage() {
         if (productsLoaded) return; // ตรวจสอบว่ามีการโหลดข้อมูลแล้วหรือยัง
         try {
             // แก้ไขการเรียก products.json
-            const response = await fetch('../scr/data/products.json');
+            const response = await fetch('../src/data/products.json');
             const priceSnapshot = await db.collection('historical_prices').get();
             const data = await response.json();
 

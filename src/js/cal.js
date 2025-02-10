@@ -4,7 +4,7 @@ let selectedPlant = null;
 async function loadProductsData() {
     try {
         // แก้ไข path การโหลด products.json
-        const response = await fetch('../scr/data/products.json');
+        const response = await fetch('../src/data/products.json');
         productsData = await response.json();
         setupSearch();
 

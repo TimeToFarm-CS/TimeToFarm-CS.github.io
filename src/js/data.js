@@ -222,7 +222,7 @@ export function initDataPage() {
         const name = params.get('name');
 
         // แก้ไขการเรียก products.json
-        const productsResponse = await fetch('../scr/data/products.json');
+        const productsResponse = await fetch('../src/data/products.json');
         const productsData = await productsResponse.json();
 
         // ตรวจสอบว่ามี product ตรงกับเงื่อนไขหรือไม่
