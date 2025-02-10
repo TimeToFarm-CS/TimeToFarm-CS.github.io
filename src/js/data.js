@@ -1,10 +1,14 @@
 import firebaseConfig from './config.js';
+// หากคุณใช้วิธี import จาก CDN ให้คอมเมนต์บรรทัดด้านล่างและแก้เป็น import จาก CDN
+// import * as tf from '@tensorflow/tfjs';
 
 export function initDataPage() {
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
     let priceChart = null;
+    // ----------------------------------------
     // ฟังก์ชันเรียก Cloud Function "predictPrices"
+    // ----------------------------------------
     async function callCloudFunctionPredictPrices(productId, months = 2) {
         console.log("Sending productId to Cloud Functions:", productId);
         try {
@@ -23,7 +27,9 @@ export function initDataPage() {
             return [];
         }
     }
+    // ----------------------------------------
     // ฟังก์ชันสำหรับคำนวณการเฉลี่ย
+    // ----------------------------------------
     function calculateAverages(items, type) {
         if (type === 'none') return items;
 
@@ -61,7 +67,14 @@ export function initDataPage() {
             high: Math.round(avg.sum_high / avg.count)
         }));
     }
+
+    // ----------------------------------------
+    // (ไม่ใช้ trainModel/predictFuturePrices ฝั่ง client เพราะให้ Cloud Functions ทำงานแทน)
+    // ----------------------------------------
+
+    // ----------------------------------------
     // ฟังก์ชันสำหรับแสดงกราฟ
+    // ----------------------------------------
     function renderChart(data) {
         if (priceChart) priceChart.destroy();
         priceChart = new Chart(document.getElementById('priceChart'), {
@@ -113,7 +126,9 @@ export function initDataPage() {
         });
     }
 
+    // ----------------------------------------
     // ฟังก์ชันกรองข้อมูลและแสดงกราฟ
+    // ----------------------------------------
     async function filterChartData(productId, startDate, endDate) {
         try {
             console.log("filterChartData -> productId:", productId);
@@ -153,7 +168,9 @@ export function initDataPage() {
         }
     }
 
+    // ----------------------------------------
     // ตัวอย่างฟังก์ชันใหม่ predictMonthlyPrices ที่เรียกใช้ Cloud Function
+    // ----------------------------------------
     async function predictMonthlyPrices(productId) {
         try {
             const doc = await db.collection('historical_prices').doc(productId.toString()).get();
