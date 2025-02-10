@@ -384,25 +384,3 @@ export function initDataPage() {
 
     loadProductData();
 }
-<<<<<<< HEAD
-
-// function findLastYearPrice(item, allPriceData) {
-//     const [day, month, year] = item.date.split('/');
-//     const thisDate = new Date(year, month - 1, day);
-
-//     // เลื่อนกลับไป 1 ปี
-//     const lastYear = thisDate.getFullYear() - 1;
-//     const candidate = allPriceData.find(d => {
-//         const [dDay, dMonth, dYear] = d.date.split('/');
-//         // วันเดือนเดียวกัน + ปี = lastYear
-//         return (
-//             parseInt(dDay) === parseInt(day) &&
-//             parseInt(dMonth) === parseInt(month) &&
-//             parseInt(dYear) === lastYear
-//         );
-//     });
-
-//     return candidate ? candidate.low : 0;
-// }
-=======
->>>>>>> 3b5787ea0ad8bc2c66b075a024daa9574a182e77
