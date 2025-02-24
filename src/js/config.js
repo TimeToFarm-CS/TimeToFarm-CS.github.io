@@ -1,10 +1,12 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyC4zuda9WnUNjmLXnKBbmoExJuGZP1Cz2E",
-    authDomain: "time-to-farm.firebaseapp.com",
-    projectId: "time-to-farm",
-    storageBucket: "time-to-farm.firebasestorage.app",
-    messagingSenderId: "797670152835",
-    appId: "1:797670152835:web:5ccdedbc14855d18db19b6"
+const getFirebaseConfig = async () => {
+    try {
+        const response = await fetch('https://getfirebaseconfig-he3jhecsxa-uc.a.run.app');
+        const config = await response.json();
+        return config;
+    } catch (error) {
+        console.error('Error fetching Firebase config:', error);
+        throw error;
+    }
 };
 
-export default firebaseConfig;
+export default getFirebaseConfig;
