@@ -1,6 +1,6 @@
 import getFirebaseConfig from './config.js';
 
-export async function initHomepage() {
+export async function initIndex() {
     const firebaseConfig = await getFirebaseConfig();
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
