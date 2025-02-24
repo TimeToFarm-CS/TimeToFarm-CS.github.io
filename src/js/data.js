@@ -1,8 +1,7 @@
-import firebaseConfig from './config.js';
-// หากคุณใช้วิธี import จาก CDN ให้คอมเมนต์บรรทัดด้านล่างและแก้เป็น import จาก CDN
-// import * as tf from '@tensorflow/tfjs';
+import getFirebaseConfig from './config.js';
 
-export function initDataPage() {
+export async function initDataPage() {
+    const firebaseConfig = await getFirebaseConfig();
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
     let priceChart = null;
